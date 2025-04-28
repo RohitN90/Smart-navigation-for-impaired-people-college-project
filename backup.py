@@ -7,10 +7,10 @@ import pyttsx3
 engine = pyttsx3.init()
 
 # Load YOLOv3 configuration and weights
-net = cv2.dnn.readNet('path_to_yolov3/yolov3.weights', 'path_to_yolov3/yolov3.cfg')
+net = cv2.dnn.readNet('./yolov3.weights', './yolov3.cfg')
 
 # Load the COCO class labels
-with open('path_to_yolov3/coco.names', 'r') as f:
+with open('./coco.names', 'r') as f:
     classes = [line.strip() for line in f.readlines()]
 
 # Get the output layer names
@@ -110,8 +110,8 @@ while True:
             detected_objects.update(new_detected_objects)
         start_time = current_time
 
-    # Announce new detected objects every 10 seconds
-    if current_time - speech_time >= 10:
+    # Announce new detected objects every 6 seconds
+    if current_time - speech_time >= 6:
         if new_detected_objects - detected_objects:
             if len(new_detected_objects) == 1:
                 obj = next(iter(new_detected_objects))
@@ -125,8 +125,8 @@ while True:
             engine.runAndWait()
         speech_time = current_time
 
-    # Clear stored objects every 30 seconds
-    if current_time - clear_time >= 30:
+    # Clear stored objects every 20 seconds
+    if current_time - clear_time >= 20:
         detected_objects.clear()
         clear_time = current_time
 
