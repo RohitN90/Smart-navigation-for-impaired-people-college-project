@@ -20,8 +20,16 @@ try:
 except:
     output_layers = [layer_names[i[0] - 1] for i in net.getUnconnectedOutLayers()]
 
-# Open a connection to the camera
-cap = cv2.VideoCapture(0)
+# Open a connection to the camera with custom settings
+cap = cv2.VideoCapture(0)  # 0 for default camera, 1 for external camera
+
+# Set custom frame settings
+cap.set(cv2.CAP_PROP_FRAME_WIDTH, 1280)  # Set width to 1280 pixels
+cap.set(cv2.CAP_PROP_FRAME_HEIGHT, 720)  # Set height to 720 pixels
+cap.set(cv2.CAP_PROP_FPS, 30)  # Set frame rate to 30 FPS
+
+# Print current camera settings
+
 
 # Initialize timers and detected objects
 start_time = time.time()
@@ -40,6 +48,9 @@ while True:
     ret, frame = cap.read()
     if not ret:
         break
+
+    # Resize frame if needed (optional)
+    frame = cv2.resize(frame, (1280, 720))
 
     height, width, channels = frame.shape
 

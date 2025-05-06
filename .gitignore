@@ -1,0 +1,10 @@
+.vscode
+dataset
+.projectEnv
+output.avi
+*.pyc
+*.pyo
+*.pyd
+*.pyw
+*.pyz
+*.pywz
